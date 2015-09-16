@@ -16,6 +16,7 @@ libraryDependencies ++= Seq(
   "com.typesafe.slick" %% "slick" % "3.0.3",
   "org.slf4j" % "slf4j-nop" % "1.6.4",
   "io.strongtyped" %% "active-slick" % "0.3.1",
+  "com.typesafe.slick" %% "slick-codegen" % "3.0.3",
   specs2 % Test
 )
 

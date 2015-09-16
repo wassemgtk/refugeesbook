@@ -1,6 +1,6 @@
 # --- !Ups
-CREATE TABLE `contact_list` (
-  `contact_id` int(11) NOT NULL,
+CREATE TABLE `contacts` (
+  `id` int(11) NOT NULL,
   `country_id` int(11) NOT NULL,
   `zone_id` int(11) NOT NULL,
   `contact_name` varchar(100) NOT NULL,
@@ -13,7 +13,7 @@ CREATE TABLE `contact_list` (
 
 
 CREATE TABLE `country` (
-  `country_id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(128) NOT NULL,
   `iso_code_2` varchar(2) NOT NULL,
   `iso_code_3` varchar(3) NOT NULL,
@@ -25,7 +25,7 @@ CREATE TABLE `country` (
 
 
 
-INSERT INTO `country` (`country_id`, `name`, `iso_code_2`, `iso_code_3`, `address_format`, `postcode_required`, `status`) VALUES
+INSERT INTO `country` (`id`, `name`, `iso_code_2`, `iso_code_3`, `address_format`, `postcode_required`, `status`) VALUES
 (1, 'Afghanistan', 'AF', 'AFG', '', 0, 1),
 (2, 'Albania', 'AL', 'ALB', '', 0, 1),
 (3, 'Algeria', 'DZ', 'DZA', '', 0, 1),
@@ -279,7 +279,7 @@ INSERT INTO `country` (`country_id`, `name`, `iso_code_2`, `iso_code_3`, `addres
 
 
 CREATE TABLE `fb_group` (
-  `fb_group_id` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `country_id` int(11) NOT NULL,
   `zone_id` int(11) NOT NULL,
   `group_name` varchar(100) NOT NULL,
@@ -291,7 +291,7 @@ CREATE TABLE `fb_group` (
 
 
 CREATE TABLE `information_description` (
-  `information_id` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `country_id` int(11) NOT NULL,
   `title` varchar(64) NOT NULL,
   `description` text NOT NULL,
@@ -311,7 +311,7 @@ CREATE TABLE `messages` (
 
 
 CREATE TABLE `news` (
-  `news_id` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `country_id` int(11) NOT NULL,
   `zone_id` int(11) NOT NULL,
   `title` varchar(64) NOT NULL,
@@ -333,7 +333,7 @@ CREATE TABLE `phonenumber` (
 
 
 CREATE TABLE `setting` (
-  `setting_id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `country_id` int(11) NOT NULL DEFAULT '0',
   `group` varchar(32) NOT NULL,
   `key` varchar(64) NOT NULL,
@@ -345,7 +345,7 @@ CREATE TABLE `setting` (
 
 
 CREATE TABLE `user` (
-  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_group_id` int(11) NOT NULL,
   `username` varchar(20) NOT NULL,
   `password` varchar(40) NOT NULL,
@@ -363,7 +363,7 @@ CREATE TABLE `user` (
 
 
 CREATE TABLE `user_group` (
-  `user_group_id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) NOT NULL,
   `permission` text NOT NULL,
   PRIMARY KEY (`user_group_id`)
@@ -373,7 +373,7 @@ CREATE TABLE `user_group` (
 
 
 CREATE TABLE `zone` (
-  `zone_id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `country_id` int(11) NOT NULL,
   `name` varchar(128) NOT NULL,
   `code` varchar(32) NOT NULL,
@@ -383,7 +383,7 @@ CREATE TABLE `zone` (
 
 
 
-INSERT INTO `zone` (`zone_id`, `country_id`, `name`, `code`, `status`) VALUES
+INSERT INTO `zone` (`id`, `country_id`, `name`, `code`, `status`) VALUES
 (1, 1, 'Badakhshan', 'BDS', 1),
 (2, 1, 'Badghis', 'BDG', 1),
 (3, 1, 'Baghlan', 'BGL', 1),
