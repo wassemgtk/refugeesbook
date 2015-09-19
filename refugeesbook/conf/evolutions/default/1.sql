@@ -1,4 +1,5 @@
 # --- !Ups
+
 DROP TABLE IF EXISTS `contacts`;
 CREATE TABLE IF NOT EXISTS `contacts` (
   `id` int(11) NOT NULL,
@@ -15,15 +16,130 @@ CREATE TABLE IF NOT EXISTS `contacts` (
 
 DROP TABLE IF EXISTS `country`;
 CREATE TABLE IF NOT EXISTS `country` (
+    `id` INT(11) NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(128) NOT NULL,
+    `iso_code_2` VARCHAR(2) NOT NULL,
+    `iso_code_3` VARCHAR(3) NOT NULL,
+    `address_format` TEXT NOT NULL,
+    `postcode_required` TINYINT(1) NOT NULL,
+    `status` TINYINT(1) NOT NULL DEFAULT '1',
+    PRIMARY KEY (`id`)
+)  ENGINE=MYISAM DEFAULT CHARSET=UTF8;
+
+
+DROP TABLE IF EXISTS `fb_group`;
+CREATE TABLE IF NOT EXISTS  `fb_group` (
+  `id` int(11) NOT NULL,
+  `country_id` int(11) NOT NULL,
+  `zone_id` int(11) NOT NULL,
+  `group_name` varchar(100) NOT NULL,
+  `group_url` varchar(100) NOT NULL,
+  `group_id` varchar(64) NOT NULL,
+  `description` text NOT NULL,
+  PRIMARY KEY (`id`,`country_id`,`zone_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+DROP TABLE IF EXISTS `information_description`;
+CREATE TABLE IF NOT EXISTS  `information_description` (
+  `id` int(11) NOT NULL,
+  `country_id` int(11) NOT NULL,
+  `title` varchar(64) NOT NULL,
+  `description` text NOT NULL,
+  PRIMARY KEY (`id`,`country_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+
+DROP TABLE IF EXISTS `messages`;
+CREATE TABLE IF NOT EXISTS `messages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `from` varchar(255) NOT NULL,
+  `body` text NOT NULL,
+  `added_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+DROP TABLE IF EXISTS `news`;
+CREATE TABLE IF NOT EXISTS  `news` (
+  `id` int(11) NOT NULL,
+  `country_id` int(11) NOT NULL,
+  `zone_id` int(11) NOT NULL,
+  `title` varchar(64) NOT NULL,
+  `description` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+DROP TABLE IF EXISTS `phonenumber`;
+CREATE TABLE IF NOT EXISTS `phonenumber` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `number` varchar(255) NOT NULL,
+  `type` varchar(255) NOT NULL,
+  `provider` varchar(255) NOT NULL,
+  `added_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+
+DROP TABLE IF EXISTS `setting`;
+CREATE TABLE IF NOT EXISTS `setting` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `country_id` int(11) NOT NULL DEFAULT '0',
+  `group` varchar(32) NOT NULL,
+  `key` varchar(64) NOT NULL,
+  `value` text NOT NULL,
+  `serialized` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+
+
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE IF NOT EXISTS  `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_group_id` int(11) NOT NULL,
+  `username` varchar(20) NOT NULL,
+  `password` varchar(40) NOT NULL,
+  `salt` varchar(9) NOT NULL,
+  `firstname` varchar(32) NOT NULL,
+  `lastname` varchar(32) NOT NULL,
+  `email` varchar(96) NOT NULL,
+  `code` varchar(40) NOT NULL,
+  `ip` varchar(40) NOT NULL,
+  `status` tinyint(1) NOT NULL,
+  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+
+DROP TABLE IF EXISTS `user_group`;
+CREATE TABLE IF NOT EXISTS  `user_group` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(64) NOT NULL,
+  `permission` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+
+
+
+DROP TABLE IF EXISTS `zone`;
+CREATE TABLE IF NOT EXISTS  `zone` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `country_id` int(11) NOT NULL,
   `name` varchar(128) NOT NULL,
-  `iso_code_2` varchar(2) NOT NULL,
-  `iso_code_3` varchar(3) NOT NULL,
-  `address_format` text NOT NULL,
-  `postcode_required` tinyint(1) NOT NULL,
+  `code` varchar(32) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+
 
 
 
@@ -277,111 +393,6 @@ INSERT INTO `country` (`id`, `name`, `iso_code_2`, `iso_code_3`, `address_format
 (249, 'St. Barthelemy', 'BL', 'BLM', '', 0, 1),
 (250, 'St. Martin (French part)', 'MF', 'MAF', '', 0, 1),
 (251, 'Canary Islands', 'IC', 'ICA', '', 0, 1);
-
-
-
-CREATE TABLE `fb_group` (
-  `id` int(11) NOT NULL,
-  `country_id` int(11) NOT NULL,
-  `zone_id` int(11) NOT NULL,
-  `group_name` varchar(100) NOT NULL,
-  `group_url` varchar(100) NOT NULL,
-  `group_id` varchar(64) NOT NULL,
-  `description` text NOT NULL,
-  PRIMARY KEY (`id`,`country_id`,`zone_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
-
-CREATE TABLE `information_description` (
-  `id` int(11) NOT NULL,
-  `country_id` int(11) NOT NULL,
-  `title` varchar(64) NOT NULL,
-  `description` text NOT NULL,
-  PRIMARY KEY (`id`,`country_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
-
-
-CREATE TABLE `messages` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `from` varchar(255) NOT NULL,
-  `body` text NOT NULL,
-  `added_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-CREATE TABLE `news` (
-  `id` int(11) NOT NULL,
-  `country_id` int(11) NOT NULL,
-  `zone_id` int(11) NOT NULL,
-  `title` varchar(64) NOT NULL,
-  `description` text NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
-
-CREATE TABLE `phonenumber` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `number` varchar(255) NOT NULL,
-  `type` varchar(255) NOT NULL,
-  `provider` varchar(255) NOT NULL,
-  `added_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-
-CREATE TABLE `setting` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `country_id` int(11) NOT NULL DEFAULT '0',
-  `group` varchar(32) NOT NULL,
-  `key` varchar(64) NOT NULL,
-  `value` text NOT NULL,
-  `serialized` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
-
-
-
-CREATE TABLE `user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_group_id` int(11) NOT NULL,
-  `username` varchar(20) NOT NULL,
-  `password` varchar(40) NOT NULL,
-  `salt` varchar(9) NOT NULL,
-  `firstname` varchar(32) NOT NULL,
-  `lastname` varchar(32) NOT NULL,
-  `email` varchar(96) NOT NULL,
-  `code` varchar(40) NOT NULL,
-  `ip` varchar(40) NOT NULL,
-  `status` tinyint(1) NOT NULL,
-  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
-
-
-CREATE TABLE `user_group` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(64) NOT NULL,
-  `permission` text NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
-
-
-
-
-CREATE TABLE `zone` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `country_id` int(11) NOT NULL,
-  `name` varchar(128) NOT NULL,
-  `code` varchar(32) NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 
 
@@ -1921,7 +1932,6 @@ INSERT INTO `zone` (`id`, `country_id`, `name`, `code`, `status`) VALUES
 (1556, 101, 'Fars', 'FAR', 1),
 (1557, 101, 'Hormozgan', 'HRM', 1),
 (1558, 101, 'Sistan and Baluchistan', 'SBL', 1);
-
 
 
 # --- !Downs

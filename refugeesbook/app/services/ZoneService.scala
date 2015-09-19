@@ -18,7 +18,10 @@ trait ZoneServiceComponent extends ZoneRepositoryComponent with Schemas with DBC
 
     def getByCountry(countryId: Long): Future[Iterable[Zone]] = zoneRepository.getByCountry(countryId)
 
+    def getByName(name: String): Future[Option[Zone]] = zoneRepository.getByName(name)
+
     def getByCountryName(countryName: String): Future[Iterable[Zone]] = zoneRepository.getByCountryName(countryName)
+
   }
 
 }

@@ -34,6 +34,10 @@ trait ZoneRepositoryComponent {
           .result
       }
     }
+
+    def getByName(name: String): Future[Option[Zone]] = {
+      db.run(zones.filter(_.name like s"%$name%").result.headOption)
+    }
   }
 
 }

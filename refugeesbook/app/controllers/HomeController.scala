@@ -1,7 +1,7 @@
 package controllers
 
 
-import models.entities.Country
+import models.entities.{Zone, Country}
 import play.api.Logger
 import play.api.mvc._
 import services.Services
@@ -33,5 +33,21 @@ class HomeController extends Controller with Services {
       }
     }
   }
+
+  def services(countryName: String, zoneName: String) = Action async { implicit request =>
+    for {
+      country <- countryService.getByName(countryName)
+      zone <- zoneService.getByName(zoneName)
+    } yield (country, zone) match {
+      case (Some(country: Country), Some(zone: Zone)) =>
+        Ok(views.html.zoneServices(country, zone))
+      case other =>
+        Redirect(routes.HomeController.index)
+          .flashing(
+            "error" -> "Please select correct country and zone"
+          )
+    }
+  }
+
 }
 
