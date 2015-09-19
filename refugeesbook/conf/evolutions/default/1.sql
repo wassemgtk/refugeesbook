@@ -1,5 +1,6 @@
 # --- !Ups
-CREATE TABLE `contacts` (
+DROP TABLE IF EXISTS `contacts`;
+CREATE TABLE IF NOT EXISTS `contacts` (
   `id` int(11) NOT NULL,
   `country_id` int(11) NOT NULL,
   `zone_id` int(11) NOT NULL,
@@ -8,11 +9,12 @@ CREATE TABLE `contacts` (
   `contact_type` varchar(64) NOT NULL,
   `contact_channel` varchar(100) NOT NULL,
   `description` text NOT NULL,
-  PRIMARY KEY (`contact_id`,`country_id`,`zone_id`)
+  PRIMARY KEY (`id`,`country_id`,`zone_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
-CREATE TABLE `country` (
+DROP TABLE IF EXISTS `country`;
+CREATE TABLE IF NOT EXISTS `country` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(128) NOT NULL,
   `iso_code_2` varchar(2) NOT NULL,
@@ -20,7 +22,7 @@ CREATE TABLE `country` (
   `address_format` text NOT NULL,
   `postcode_required` tinyint(1) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`country_id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 
@@ -286,7 +288,7 @@ CREATE TABLE `fb_group` (
   `group_url` varchar(100) NOT NULL,
   `group_id` varchar(64) NOT NULL,
   `description` text NOT NULL,
-  PRIMARY KEY (`fb_group_id`,`country_id`,`zone_id`)
+  PRIMARY KEY (`id`,`country_id`,`zone_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
@@ -295,7 +297,7 @@ CREATE TABLE `information_description` (
   `country_id` int(11) NOT NULL,
   `title` varchar(64) NOT NULL,
   `description` text NOT NULL,
-  PRIMARY KEY (`information_id`,`country_id`)
+  PRIMARY KEY (`id`,`country_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
@@ -316,7 +318,7 @@ CREATE TABLE `news` (
   `zone_id` int(11) NOT NULL,
   `title` varchar(64) NOT NULL,
   `description` text NOT NULL,
-  PRIMARY KEY (`news_id`,`country_id`,`zone_id`)
+  PRIMARY KEY (`id`,`country_id`,`zone_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
@@ -339,7 +341,7 @@ CREATE TABLE `setting` (
   `key` varchar(64) NOT NULL,
   `value` text NOT NULL,
   `serialized` tinyint(1) NOT NULL,
-  PRIMARY KEY (`setting_id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 
@@ -357,7 +359,7 @@ CREATE TABLE `user` (
   `ip` varchar(40) NOT NULL,
   `status` tinyint(1) NOT NULL,
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`user_id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
@@ -366,7 +368,7 @@ CREATE TABLE `user_group` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) NOT NULL,
   `permission` text NOT NULL,
-  PRIMARY KEY (`user_group_id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 
@@ -378,7 +380,7 @@ CREATE TABLE `zone` (
   `name` varchar(128) NOT NULL,
   `code` varchar(32) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`zone_id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 

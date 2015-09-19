@@ -1,0 +1,31 @@
+@import models.entities._
+
+@(countries : Iterable[Country])
+@main("Welcome to Play") {
+<!-- Page Header -->
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">اختر البلد الذي انت فيه
+        </h1>
+    </div>
+</div>
+<!-- /.row -->
+@for(countryRow <- countries.grouped(3).toList){
+<!-- Projects Row -->
+<div class="row">
+    @for(country <- countryRow){
+    <div class="col-md-4 portfolio-item">
+        <a href="#">
+            <img class="img-responsive" src="http://placehold.it/700x400" alt="">
+        </a>
+
+        <h3>
+            <a href="#">@country.name</a>
+        </h3>
+    </div>
+    }
+
+</div>
+<!-- /.row -->
+}
+}
