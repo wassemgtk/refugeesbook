@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS `contacts` (
   `contact_type` varchar(64) NOT NULL,
   `contact_channel` varchar(100) NOT NULL,
   `description` text NOT NULL,
-  PRIMARY KEY (`id`,`country_id`,`zone_id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 

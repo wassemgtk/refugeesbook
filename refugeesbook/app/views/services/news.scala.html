@@ -1,8 +1,6 @@
 @import models.entities._
-
-@(country: Country,zone : Zone)
-@main(zone.name + "Zone Services") {
-
+@(country: Country,zone : Zone, news: Iterable[News])
+@main(country.name + " " + zone.name + " News") {
 <!-- Page Header -->
 <div class="row">
     <div class="col-lg-12">
@@ -12,33 +10,38 @@
     </div>
 </div>
 <!-- /.row -->
-
 <!-- Projects Row -->
 <div class="row">
     <div class="col-md-3 portfolio-item">
-        <button type="button" class="btn btn-default btn-lg">
+        <a href="/countries/@country.name/@zone.name/map" type="button" class="btn btn-default btn-lg">
             <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
             خرطية
-        </button>
+        </a>
     </div>
     <div class="col-md-3 portfolio-item">
-        <button type="button" class="btn btn-default btn-lg">
+        <a href="/countries/@country.name/@zone.name/contacts" type="button" class="btn btn-default btn-lg">
             <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>
             ارقام الاتصال و الطوارئ
-        </button>
+        </a>
     </div>
     <div class="col-md-3 portfolio-item">
-        <button type="button" class="btn btn-default btn-lg">
+        <a href="/countries/@country.name/@zone.name/news" type="button" class="btn btn-default btn-lg active">
             <span class="glyphicon glyphicon-flash" aria-hidden="true"></span>
             اخبار و تحذيرات
-        </button>
+        </a>
     </div>
     <div class="col-md-3 portfolio-item">
-        <button type="button" class="btn btn-default btn-lg">
+        <a href="/countries/@country.name/@zone.name/facebook-pages" type="button" class="btn btn-default btn-lg">
             <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
             صفحات فيس بوك صديقة
-        </button>
+        </a>
     </div>
 </div>
 
+@for(n <- news) {
+<div class="row">
+    <a>@n.title</a>
+    <b>@n.description</b>
+</div>
+}
 }

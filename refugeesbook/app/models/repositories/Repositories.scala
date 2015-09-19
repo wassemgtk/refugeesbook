@@ -9,6 +9,7 @@ trait Repositories
   with ZoneRepositoryComponent
   with UserRepositoryComponent
   with NewsRepositoryComponent
+  with FacebookGroupRepositoryComponent
   with Schemas {
 
 }

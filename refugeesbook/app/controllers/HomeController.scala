@@ -34,6 +34,7 @@ class HomeController extends Controller with Services {
     }
   }
 
+  /*
   def services(countryName: String, zoneName: String) = Action async { implicit request =>
     for {
       country <- countryService.getByName(countryName)
@@ -48,6 +49,7 @@ class HomeController extends Controller with Services {
           )
     }
   }
+  */
 
 }
 

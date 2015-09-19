@@ -8,7 +8,7 @@ trait NewsTable {
 
   import profile.api._
 
-  class NewsT(tag: Tag) extends Table[News](tag, "zone") {
+  class NewsT(tag: Tag) extends Table[News](tag, "news") {
     def countryId = column[Long]("country_id")
 
     def zoneId = column[Long]("zone_id")

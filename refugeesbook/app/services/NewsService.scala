@@ -15,6 +15,8 @@ trait NewsServiceComponent extends NewsRepositoryComponent with Schemas with DBC
     def getById(id: Long): Future[Option[News]] = newsRepository.getById(id)
 
     def getAll(): Future[Iterable[News]] = newsRepository.getAll()
+
+    def getByZoneName(zoneName: String): Future[Iterable[News]] = newsRepository.getByZoneName(zoneName)
   }
 
 }
