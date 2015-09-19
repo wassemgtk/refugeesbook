@@ -318,7 +318,7 @@ CREATE TABLE `news` (
   `zone_id` int(11) NOT NULL,
   `title` varchar(64) NOT NULL,
   `description` text NOT NULL,
-  PRIMARY KEY (`id`,`country_id`,`zone_id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
