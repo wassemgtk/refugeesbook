@@ -14,6 +14,8 @@ trait CountryServiceComponent extends CountryRepositoryComponent with Schemas wi
   class CountryService {
     def getById(id: Long): Future[Option[Country]] = countryRepository.getById(id)
 
+    def getByName(name: String): Future[Option[Country]] = countryRepository.getByName(name)
+
     def getAll(): Future[Iterable[Country]] = countryRepository.getAll()
   }
 

@@ -3,6 +3,7 @@ package services
 
 trait Services
   extends DBConnection
-  with CountryServiceComponent {
+  with CountryServiceComponent
+  with ZoneServiceComponent {
 
 }

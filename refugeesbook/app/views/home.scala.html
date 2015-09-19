@@ -15,12 +15,11 @@
 <div class="row">
     @for(country <- countryRow){
     <div class="col-md-4 portfolio-item">
-        <a href="#">
+        <a href="/countries/@country.name">
             <img class="img-responsive" src="http://placehold.it/700x400" alt="">
         </a>
-
         <h3>
-            <a href="#">@country.name</a>
+            <a href="/countries/@country.name">@country.name</a>
         </h3>
     </div>
     }
