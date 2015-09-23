@@ -1,18 +1,18 @@
 @import models.entities._
 
 @(country: Country,zones : Iterable[Zone])
-@main("Welcome to Play") {
+@main("Refugees Book") {
 <!-- Page Header -->
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
-			You are in
+			Choose city
         </h1>
     </div>
 </div>
 <!-- /.row -->
 @for(zoneRow <- zones.grouped(4).toList){
-<!-- Projects Row -->
+<!--  Row -->
 <div class="row">
     @for(zone <- zoneRow){
     <div class="col-md-3 portfolio-item">
