@@ -1,0 +1,28 @@
+@import models.entities._
+
+@(countries : Iterable[Country])
+@main("Refugees Book") {
+<!-- Page Header -->
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+			Choose a country
+        </h1>
+    </div>
+</div>
+<!-- /.row -->
+@for(countryRow <- countries.grouped(3).toList){
+<!-- Projects Row -->
+<div class="row">
+    @for(country <- countryRow){
+    <div class="col-md-4 portfolio-item">
+        <h3>
+            <a href="/countries/@country.name"><span class="label label-primary"><span class="flag-icon flag-icon-@country.isoCode2"></span> @country.name</span></a>
+        </h3>
+    </div>
+    }
+
+</div>
+<!-- /.row -->
+}
+}

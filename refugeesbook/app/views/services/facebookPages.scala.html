@@ -1,0 +1,72 @@
+@import models.entities._
+@(country: Country,zone : Zone, groups: Iterable[FacebookGroup])
+@main(country.name + " " + zone.name + " Facebook Groups and Pages") {
+<!-- Page Header -->
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            اختر المنطقة او المدينة
+        </h1>
+    </div>
+</div>
+<!-- /.row -->
+<!-- Projects Row -->
+<div class="row">
+    <div class="col-md-3 portfolio-item">
+        <a href="/countries/@country.name/@zone.name/map" type="button" class="btn btn-default btn-lg">
+            <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
+            خرطية
+        </a>
+    </div>
+    <div class="col-md-3 portfolio-item">
+        <a href="/countries/@country.name/@zone.name/contacts" type="button" class="btn btn-default btn-lg active">
+            <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>
+            ارقام الاتصال و الطوارئ
+        </a>
+    </div>
+    <div class="col-md-3 portfolio-item">
+        <a href="/countries/@country.name/@zone.name/news" type="button" class="btn btn-default btn-lg">
+            <span class="glyphicon glyphicon-flash" aria-hidden="true"></span>
+            اخبار و تحذيرات
+        </a>
+    </div>
+    <div class="col-md-3 portfolio-item">
+        <a href="/countries/@country.name/@zone.name/facebook-pages" type="button" class="btn btn-default btn-lg">
+            <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+            صفحات فيس بوك صديقة
+        </a>
+    </div>
+</div>
+
+<!-- Page Header -->
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            جهات الاتصال التى من الممكن تساعدك
+        </h1>
+    </div>
+</div>
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>الاسم</th>
+            <th>رقم الهاتف</th>
+            <th>طريقة التواصل</th>
+            <th>جهة الاتصال</th>
+        </tr>
+        </thead>
+        <tbody>
+        @for(group <- groups) {
+        <tr>
+            <td><a href="@group.groupUrl">@group.groupName</a></td>
+            <td>@group.groupId</td>
+            <td>@group.groupUrl</td>
+            <td>@group.description</td>
+        </tr>
+        }
+        </tbody>
+    </table>
+</div>
+}

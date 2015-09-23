@@ -3,7 +3,13 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.index
+GET     /                                                controllers.HomeController.index
+GET     /countries/:countryName                          controllers.HomeController.zones(countryName: String)
+GET     /countries/:countryName/:zoneName                controllers.ContactsController.index(countryName: String,zoneName: String)
+GET     /countries/:countryName/:zoneName/map                controllers.MapController.index(countryName: String,zoneName: String)
+GET     /countries/:countryName/:zoneName/contacts                controllers.ContactsController.index(countryName: String,zoneName: String)
+GET     /countries/:countryName/:zoneName/news                controllers.NewsController.index(countryName: String,zoneName: String)
+GET     /countries/:countryName/:zoneName/facebook-pages                controllers.FacebookPagesController.index(countryName: String,zoneName: String)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
